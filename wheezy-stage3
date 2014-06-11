@@ -109,24 +109,16 @@ install_packages() {
   ssh_in_to_qemu chroot /mnt sh -l -ex - <<\EOF
 apt-get update
 # install some utils
-apt-get install -y ssh locales less fbset sudo psmisc strace module-init-tools ifplugd ed ncdu
+apt-get install -y ssh locales less fbset sudo psmisc strace module-init-tools ifplugd
 apt-get install -y console-setup keyboard-configuration debconf-utils parted unzip
-apt-get install -y build-essential manpages-dev python bash-completion gdb pkg-config
-apt-get install -y python-rpi.gpio v4l-utils
-apt-get install -y lua5.1
-[ "$(dpkg --print-architecture)" = armhf ] && apt-get install -y luajit
+apt-get install -y build-essential manpages-dev bash-completion pkg-config
 apt-get install -y hardlink ca-certificates curl
-apt-get install -y fake-hwclock ntp nfs-common usbutils
-apt-get install -y --no-install-recommends cifs-utils
-apt-get install -y libraspberrypi-dev libraspberrypi-doc libfreetype6-dev
+apt-get install -y fake-hwclock ntp usbutils
 # Install stuff for wireless
 apt-get install -y wpasupplicant wireless-tools firmware-atheros firmware-brcm80211 \
   firmware-libertas firmware-ralink firmware-realtek
 /etc/init.d/fake-hwclock stop # save current time
 update-rc.d hwclock.sh disable
-# Don't need to start these by default, wastes boot time
-update-rc.d nfs-common disable
-update-rc.d rpcbind disable
 EOF
 }
 
