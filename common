@@ -99,14 +99,9 @@ export_image_for_release() {
   qemu-img create -f $IMGFORMAT -b ../$1 temp.$IMGFORMAT
   run_qemu temp.$IMGFORMAT
   onvm_chroot sh -l -ex <<\EOF
-cp /usr/share/doc/raspi-config/sample_profile_d.sh /etc/profile.d/raspi-config.sh
 # Default to a known-good nameserver
 printf "nameserver 8.8.8.8\n" > /etc/resolv.conf
 /etc/init.d/fake-hwclock stop # save current time
-#rm /usr/bin/raspi-config
-#cd /usr/bin
-#wget https://raw.github.com/asb/raspi-config/master/raspi-config
-#chmod +x raspi-config
 EOF
   shutdown_qemu
   attach_image_to_nbd temp.$IMGFORMAT /dev/nbd0
