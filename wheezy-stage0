@@ -23,7 +23,7 @@ EOF
 
 do_debootstrap() {
   # Need bzip2 for http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=657560
-  sudo debootstrap --components=main,contrib,non-free \
+  sudo ${APT_PROXY:+http_proxy=$APT_PROXY} debootstrap --components=main,contrib,non-free \
   --verbose \
   --foreign --arch $TGT_ARCH --include=bzip2 \
   --no-check-gpg \

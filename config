@@ -12,6 +12,8 @@ else
   TGT_ARCH=armel
   DEB_MIRROR=http://http.debian.net/debian
 fi
+APT_PROXY=http://apt-cache.tomlins.org.uk:3142/
+
 NBD_DEV=/dev/nbd0
 BOOT_DEV="$NBD_DEV"p1
 ROOT_DEV="$NBD_DEV"p2

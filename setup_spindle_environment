@@ -90,11 +90,17 @@ sed -i $ETC_SCHROOT_SPINDLE/nssdatabases -e "/^passwd$/d"
 sed -i $ETC_SCHROOT_SPINDLE/nssdatabases -e "/^shadow$/d"
 sed -i $ETC_SCHROOT_SPINDLE/nssdatabases -e "/^group$/d"
 
+if [ -n "$APT_PROXY" ]; then
+  export http_proxy=$APT_PROXY
+fi
 debootstrap \
   --include="qemu,bash-completion,augeas-tools,debootstrap,less,\
   sudo,parted,openssh-client,e2fsprogs,dosfstools,squashfs-tools,bzip2,git,zerofree" \
   wheezy "$TARGET_DIR" http://http.debian.net/debian || die "Debootstrap failed"
 rm "$TARGET_DIR/dev/shm" # required on my 10.04 for schroot to work
+if [ -n "$APT_PROXY" ]; then
+  printf "Acquire::http::Proxy \"${APT_PROXY}\";\n" >> ${TARGET_DIR}/etc/apt/apt.conf.d/01proxy
+fi
 
 # Copy passwd/shadow/group databases
 getent passwd > "$TARGET_DIR/etc/passwd"
