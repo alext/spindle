@@ -103,13 +103,12 @@ install_packages() {
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 # install some utils
-apt-get install -y ssh locales less fbset sudo psmisc strace module-init-tools ifplugd
-apt-get install -y console-setup keyboard-configuration debconf-utils parted unzip
-apt-get install -y build-essential manpages-dev bash-completion pkg-config
-apt-get install -y hardlink ca-certificates curl
-apt-get install -y fake-hwclock ntp usbutils
-# Install stuff for wireless
-apt-get install -y wpasupplicant wireless-tools firmware-atheros firmware-brcm80211 \
+apt-get install -y ssh locales less fbset sudo psmisc strace module-init-tools ifplugd \
+  console-setup keyboard-configuration debconf-utils parted unzip \
+  build-essential manpages-dev bash-completion pkg-config \
+  hardlink ca-certificates curl \
+  fake-hwclock ntp usbutils \
+  wpasupplicant wireless-tools firmware-atheros firmware-brcm80211 \
   firmware-libertas firmware-ralink firmware-realtek
 /etc/init.d/fake-hwclock stop # save current time
 update-rc.d hwclock.sh disable
