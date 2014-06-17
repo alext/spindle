@@ -86,6 +86,7 @@ EOF
 
 install_firmware() {
   onvm_chroot sh -l -e - <<EOF
+export DEBIAN_FRONTEND=noninteractive
 echo "deb http://archive.raspberrypi.org/debian/ wheezy main" > /etc/apt/sources.list.d/raspi.list
 apt-key add - <<EOF1
 -----BEGIN PGP PUBLIC KEY BLOCK-----
