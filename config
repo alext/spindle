@@ -13,6 +13,7 @@ else
   DEB_MIRROR=http://http.debian.net/debian
 fi
 APT_PROXY=http://apt-cache.tomlins.org.uk:3142/
+ADD_APT_PROXY_TO_IMAGE=1
 
 NBD_DEV=/dev/nbd0
 BOOT_DEV="$NBD_DEV"p1

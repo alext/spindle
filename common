@@ -112,6 +112,7 @@ EOF
   sudo mount $ROOT_DEV rootfs
   sudo cp rootfs/etc/rpi-issue boot/issue.txt
   [ -n "$RASPBIAN" ] && sudo mv rootfs/etc/ld.so.preload.disable rootfs/etc/ld.so.preload
+  [ -n "$APT_PROXY" -a -z "$ADD_APT_PROXY_TO_IMAGE" ] && sudo rm rootfs/etc/apt/apt.conf.d/01proxy
   sudo umount $BOOT_DEV
   sudo umount $ROOT_DEV
   detach_image_from_nbd /dev/nbd0
