@@ -235,14 +235,6 @@ sed /etc/default/ifplugd -i -e 's/^HOTPLUG_INTERFACES.*/HOTPLUG_INTERFACES="all"
 EOF
 }
 
-setup_sudoers() {
-  onvm_chroot sh -l -ex - <<EOF
-chmod +w /etc/sudoers
-echo "pi ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-chmod -w /etc/sudoers
-EOF
-}
-
 # We use a swap file rather than a swap partition for greater flexibility
 setup_swap() {
   onvm_chroot sh -l -e - <<EOF
@@ -335,7 +327,6 @@ dotask add_pi_user_to_groups
 dotask configure_useradd
 dotask make_udev_input_rule
 dotask configure_wifi
-dotask setup_sudoers
 dotask setup_swap
 dotask setup_console_setup
 dotask cache_keymap
