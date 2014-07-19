@@ -11,7 +11,7 @@ CURIMG=stage2.$IMGFORMAT
 
 configure_users() {
   onvm_chroot sh -l -ex - <<EOF
-adduser --disabled-password --gecos "" pi
+adduser --disabled-password --gecos "" --firstuid 1100 --ingroup users pi
 echo "pi:raspberry" | chpasswd
 EOF
 }
